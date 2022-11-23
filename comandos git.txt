@@ -1,0 +1,37 @@
+git clone https://github.com/angelacng/ProyectoE14ControlMedical.git
+
+cd ProyectoE14ControlMedical
+//esto es opcional
+git config --global user.name "nombre usuario github"
+git config --global user.email "email cuenta github"
+
+//ver ramas disponibles:
+git branch -a
+
+//ubicarse en la rama
+git checkout -b 'nombre de la rama'
+
+git push -u origin 'nombre de la rama'
+
+
+
+//para verificar si localmente se realizó una modificación en la carpeta
+git status
+
+//subir los cambios al repositorio
+git add --all
+
+git commit -m"proyectoClase"
+
+git push
+
+
+//para traer cambios del repositorio a local
+git pull
+
+
+//para subir cambios de ramas a rama principal
+git checkout main
+git merge 'nombre de la rama'
+
+

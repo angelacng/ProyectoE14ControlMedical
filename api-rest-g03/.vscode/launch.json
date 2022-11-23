@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiRestG03Application<api-rest-g03>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.mintic.apirestg03.ApiRestG03Application",
+            "projectName": "api-rest-g03",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
