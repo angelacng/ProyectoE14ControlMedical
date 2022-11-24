@@ -15,16 +15,31 @@ public class PacienteServicio {
     @Autowired
     PacienteRepositorio pacienteRepositorio;
 
-    public PacienteModelo guardarPaciente(PacienteModelo paciente){
+    public String guardarPaciente(PacienteModelo paciente){
         paciente.setNombre(paciente.getNombre().toLowerCase());
         paciente.setApellido(paciente.getApellido().toLowerCase());
-        return pacienteRepositorio.save(paciente);
+        boolean estado=paciente.getId()==null || !pacienteRepositorio.existsById(paciente.getId());
+        pacienteRepositorio.save(paciente);
+        if(estado){
+            return "Se guardó el paciente";
+        }else{
+            return "Se actualizó el paciente";
+        }
+        
     }
 
     public List<PacienteModelo> getListPacientesOrden(){
         List<PacienteModelo> listaPacientes=pacienteRepositorio.findAll();
         listaPacientes.sort(Comparator.comparing(PacienteModelo::getNombre));
         return listaPacientes;
+    }
+
+    public Optional<PacienteModelo> getPacienteById(String id){
+        return pacienteRepositorio.findById(id);
+    } 
+
+    public List<PacienteModelo> getPacientesByApellido(String apellido){
+        return pacienteRepositorio.findByApellido(apellido);
     }
 
     public String eliminarPacientePorID(String id){
