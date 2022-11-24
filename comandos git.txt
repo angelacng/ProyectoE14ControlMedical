@@ -19,19 +19,20 @@ git push -u origin 'nombre de la rama'
 git status
 
 //subir los cambios al repositorio
-git add --all
+git add --all  
 
 git commit -m"proyectoClase"
 
 git push
 
 
-//para traer cambios del repositorio a local
-git pull
-
 
 //para subir cambios de ramas a rama principal
 git checkout main
 git merge 'nombre de la rama'
 
+git push //desde rama main
 
+
+//para traer cambios del repositorio a local
+git pull
