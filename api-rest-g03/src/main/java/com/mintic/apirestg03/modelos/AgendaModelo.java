@@ -21,6 +21,7 @@ public class AgendaModelo {
     private String id;
     private String id_medico;
     private String nombremedico;
+    private String apellidomedico;
     private String especialidad;
     private LocalDate fecha;
     private List<CitaModelo> citas;//[{id_paciente,hora},{},{}]

@@ -43,7 +43,7 @@ public class PacienteServicio {
         return pacienteRepositorio.findByApellido(apellido);
     }
 
-    public String eliminarPacientePorID(String id){
+   /*  public String eliminarPacientePorID(String id){
         if(pacienteRepositorio.existsById(id)){
             Optional<PacienteModelo> paciente= pacienteRepositorio.findById(id);
             pacienteRepositorio.deleteById(id);               
@@ -51,7 +51,7 @@ public class PacienteServicio {
         }else{
             return "Paciente no encontrado";
         } 
-    }
+    }*/
 
     public List<PacienteModelo> pacientesByCiudad(String ciudad){
         return pacienteRepositorio.buscarPorCiudad(ciudad);
