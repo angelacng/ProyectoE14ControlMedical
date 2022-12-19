@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:8080/"
-
+//const BASE_URL = "http://localhost:8080/"
+const BASE_URL = "http://129.213.28.212:8080/"
 export async function listaAgendas() {
     const options = { method: 'GET' };
     const res = await fetch(BASE_URL + 'agendas', options);

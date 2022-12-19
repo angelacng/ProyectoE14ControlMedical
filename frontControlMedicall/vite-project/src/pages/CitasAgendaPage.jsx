@@ -10,17 +10,31 @@ function CitasAgendaPage() {
     const [agenda, setAgenda] = useState({});
     const [horaRadio,sethoraRadio]=useState("");
     const navigate = useNavigate();
+    const [citas, setCitas] = useState([]);
+    const [fecha, setFecha] = useState("");
+
     const franjaHoraria=["8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30"];
+    let horariosOcupado = [];
+    citas.map((cita) => (
+        horariosOcupado.push(cita.hora)
+    ))
 
     function returnToHome() {
         navigate("/");
     }
 
+    function returnToAgendaCitas() {
+        navigate("/agenda-citas");
+    }
+
+
     useEffect(() => {
         findAgendaById(id).then(data => {
             setAgenda(data);
+            setCitas(data.citas);
+            setFecha(data.fecha);
         });
-    }, []);
+    }, [id]);
 
     const handleSelect =(e)=>{
         sethoraRadio(e.target.value);
@@ -44,15 +58,15 @@ function CitasAgendaPage() {
         <Container className="my-3">
             <Row>
                 <Col>
-                    <p> Fecha Cita:</p>
+                    <h5> Fecha Cita:</h5>
                     <h4>{agenda.fecha}</h4>
                 </Col>
                 <Col>
-                    <p>Nombre del médico</p>
+                    <h5>Nombre del médico</h5>
                     <h4>{agenda.nombremedico} {agenda.apellidomedico}</h4>
                 </Col>
                 <Col>
-                    <p>Especialidad:</p>
+                    <h5>Especialidad:</h5>
                     <h4>{agenda.especialidad}</h4>
                 </Col>
             </Row>
@@ -70,6 +84,7 @@ function CitasAgendaPage() {
                             name="hora"
                             value={hora}
                             onChange={handleSelect}
+                            disabled={horariosOcupado.includes(hora) ? true : false}
                             />     
                         )
                             )
@@ -84,7 +99,11 @@ function CitasAgendaPage() {
                 <Col>
                 <Button variant="success" onClick={()=>{handleSubmit()}}>Registrar Cita</Button>
                 </Col>
+                <Col>
+                <Button variant="primary" onClick={returnToAgendaCitas}>Regresar</Button>
+                </Col>
             </Row>
+
         </Container>
 
     )

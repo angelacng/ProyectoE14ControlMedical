@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Container, Table, Row, Col, Button, FormControl, FormLabel } from "react-bootstrap";
+import { Container, Table, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { eliminarAgendaPorId, listaAgendas } from "../server/Server";
 

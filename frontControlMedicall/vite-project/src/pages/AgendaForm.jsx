@@ -9,6 +9,7 @@ import { findAgendaById, findAllMedicos, guardarAgenda } from "../server/Server"
 function AgendaForm() {
     const { id } = useParams();
     const navigate = useNavigate();
+  
     function returnToAgenda() {
         navigate("/agenda");
     }

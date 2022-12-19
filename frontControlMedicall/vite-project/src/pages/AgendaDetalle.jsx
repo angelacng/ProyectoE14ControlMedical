@@ -1,5 +1,5 @@
 import React from "react";
-import { Container,Col,Row,Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 function AgendaDetalle(){

@@ -24,36 +24,37 @@ function CardsAgenda() {
     }, []);
 
 
-    const fechaActual=new Date();
+    const fechaActual = new Date();
 
     return (
-            <Row className="my-3">
-                {
-                    agendas.filter(agenda=>agenda.fecha>fechaActual.toISOString()).map((agenda) => (
-                        <Col key={agenda.id}>
-                            <Card style={{ width: '18rem' }}
-                                className="mb-2"
-                                border='info'
-                            >
-                                <Card.Body >
-                                    <Card.Title>{agenda.fecha}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Agenda disponible</Card.Subtitle>
-                                    <Card.Text>
-                                        Dr(a). {agenda.nombremedico} {agenda.apellidomedico}
-                                        <p>
-                                            {agenda.especialidad}
-                                        </p>
-                                    </Card.Text>
-                                    <Link to={`/agenda/citas/${agenda.id}`}>Agendar cita</Link>
-                                 
-                                </Card.Body>
-                            </Card>
-                        </Col>
+        <Row className="my-3">
+            {
+                agendas.filter(agenda => agenda.fecha > fechaActual.toISOString()).map((agenda) => (
+                    <Col key={agenda.id}>
+                        <Card style={{ width: '18rem' }}
+                            className="mb-2"
+                            border='info'
+                        >
+                            <Card.Body >
+                                <Card.Title>{agenda.fecha}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">Agenda disponible</Card.Subtitle>
+                                <Card.Text>
+                                    Dr(a). {agenda.nombremedico} {agenda.apellidomedico}
+                                </Card.Text>
+                                <Card.Text>
+                                    {agenda.especialidad}
 
-                    ))
-                }
+                                </Card.Text>
+                                <Link to={`/agenda/citas/${agenda.id}`}>Agendar cita</Link>
 
-            </Row>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+
+                ))
+            }
+
+        </Row>
 
 
 
