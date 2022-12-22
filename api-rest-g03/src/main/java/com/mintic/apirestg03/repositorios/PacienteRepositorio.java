@@ -2,6 +2,7 @@ package com.mintic.apirestg03.repositorios;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -18,6 +19,12 @@ public interface PacienteRepositorio extends MongoRepository<PacienteModelo,Stri
 
     @Query("{fnacimiento:{$lt:?0}}")
     List<PacienteModelo>buscarPacientesMenoresDeFecha(LocalDate fecha);
+
+    Boolean existsByNdocumento(long ndocumento);
+
+    Optional<PacienteModelo> findByNdocumento(long ndocumento);
+
+    //long countByNdocumento(long ndocumento);
 
     //List<PacienteModelo> findByFnacimientoAfter(LocalDate date);//keywords for query
 

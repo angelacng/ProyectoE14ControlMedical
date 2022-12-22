@@ -16,49 +16,74 @@ public class PacienteServicio {
     @Autowired
     PacienteRepositorio pacienteRepositorio;
 
-    public String guardarPaciente(PacienteModelo paciente){
+     public String guardarPaciente(PacienteModelo paciente) {
         paciente.setNombre(paciente.getNombre().toLowerCase());
         paciente.setApellido(paciente.getApellido().toLowerCase());
-        boolean estado=paciente.getId()==null || !pacienteRepositorio.existsById(paciente.getId());
-        pacienteRepositorio.save(paciente);
-        if(estado){
-            return "Se guardó el paciente";
-        }else{
-            return "Se actualizó el paciente";
+        boolean estado = paciente.getId() == null || !pacienteRepositorio.existsById(paciente.getId());
+        Optional<PacienteModelo> paciente2 = pacienteRepositorio.findByNdocumento(paciente.getNdocumento());
+        if (estado) {
+            if (paciente2.isPresent()) {
+                return "el número de documento ya se encuentra registrado en el sistema";
+            } else {
+                pacienteRepositorio.save(paciente);
+                return "Se guardó el paciente";
+            }
+        } else {
+        if (paciente2.isPresent()) {
+                if (paciente.getId().equals(paciente2.get().getId())) { 
+                    pacienteRepositorio.save(paciente);
+                    return "Se actualizó el paciente ";
+              } else {
+                    return "Otro paciente tiene el mismo número de documento";
+                }
+            } else {
+                pacienteRepositorio.save(paciente);
+                return "Se actualizó el paciente " ;
+            } 
+
         }
-        
+
     }
 
-    public List<PacienteModelo> getListPacientesOrden(){
-        List<PacienteModelo> listaPacientes=pacienteRepositorio.findAll();
+
+
+    public List<PacienteModelo> getListPacientesOrden() {
+        List<PacienteModelo> listaPacientes = pacienteRepositorio.findAll();
         listaPacientes.sort(Comparator.comparing(PacienteModelo::getNombre));
         return listaPacientes;
     }
 
-    public Optional<PacienteModelo> getPacienteById(String id){
+    public Optional<PacienteModelo> getPacienteById(String id) {
         return pacienteRepositorio.findById(id);
-    } 
+    }
 
-    public List<PacienteModelo> getPacientesByApellido(String apellido){
+    public List<PacienteModelo> getPacientesByApellido(String apellido) {
         return pacienteRepositorio.findByApellido(apellido);
     }
 
-   /*  public String eliminarPacientePorID(String id){
-        if(pacienteRepositorio.existsById(id)){
-            Optional<PacienteModelo> paciente= pacienteRepositorio.findById(id);
-            pacienteRepositorio.deleteById(id);               
-            return "Paciente " + paciente.get().getNombre()+" Eliminado";
-        }else{
+    public String eliminarPacientePorID(String id) {
+        if (pacienteRepositorio.existsById(id)) {
+            Optional<PacienteModelo> paciente = pacienteRepositorio.findById(id);
+            pacienteRepositorio.deleteById(id);
+            return "Paciente " + paciente.get().getNombre() + " Eliminado";
+        } else {
             return "Paciente no encontrado";
-        } 
-    }*/
+        }
+    }
 
-    public List<PacienteModelo> pacientesByCiudad(String ciudad){
+    public List<PacienteModelo> pacientesByCiudad(String ciudad) {
         return pacienteRepositorio.buscarPorCiudad(ciudad);
     }
 
-    public List<PacienteModelo> pacientePorFechaMenor(LocalDate fecha){
-           return pacienteRepositorio.buscarPacientesMenoresDeFecha(fecha); 
+    public List<PacienteModelo> pacientePorFechaMenor(LocalDate fecha) {
+        return pacienteRepositorio.buscarPacientesMenoresDeFecha(fecha);
     }
 
+    public boolean pacienteExiste(long ndocumento) {
+        return pacienteRepositorio.existsByNdocumento(ndocumento);
+    }
+
+    public Optional<PacienteModelo> pacientePorNdocumento(long ndocumento) {
+        return pacienteRepositorio.findByNdocumento(ndocumento);
+    }
 }

@@ -17,44 +17,44 @@ public class AgendaServicio {
    @Autowired
    AgendaRepositorio agendaRepositorio;
    @Autowired
-   MedicoRepositorio medicoRepositorio; 
+   MedicoRepositorio medicoRepositorio;
 
-
-   public List<AgendaModelo> getAllAgendas(){
+   public List<AgendaModelo> getAllAgendas() {
       return agendaRepositorio.findAll();
    }
 
-   public List<AgendaModelo> getListAgendasOrdered(){
-      List<AgendaModelo> listaAgendas=agendaRepositorio.findAll();
+   public List<AgendaModelo> getListAgendasOrdered() {
+      List<AgendaModelo> listaAgendas = agendaRepositorio.findAll();
       listaAgendas.sort(Comparator.comparing(AgendaModelo::getFecha));
       return listaAgendas;
-  }
+   }
 
-   public Optional<AgendaModelo> getAgendaById(String id){
-      Optional<AgendaModelo> agenda=agendaRepositorio.findById(id);
-      Optional<MedicoModelo> medico=medicoRepositorio.findById(agenda.get().getId_medico());
+   public Optional<AgendaModelo> getAgendaById(String id) {
+      Optional<AgendaModelo> agenda = agendaRepositorio.findById(id);
+      Optional<MedicoModelo> medico = medicoRepositorio.findById(agenda.get().getId_medico());
       agenda.get().setNombremedico(medico.get().getNombre());
       agenda.get().setApellidomedico(medico.get().getApellido());
       agenda.get().setEspecialidad(medico.get().getEspecialidad());
 
       return agenda;
    }
-   
-   public AgendaModelo saveAgenda(AgendaModelo agenda){
-      Optional<MedicoModelo> medico=medicoRepositorio.findById(agenda.getId_medico());
-      agenda.setNombremedico(medico.get().getNombre());
-      agenda.setApellidomedico(medico.get().getApellido());
-      agenda.setEspecialidad(medico.get().getEspecialidad());
-    return agendaRepositorio.save(agenda);
+
+   public AgendaModelo saveAgenda(AgendaModelo agenda) {
+    //  if(agenda.getCitas().i){      }
+     Optional<MedicoModelo> medico = medicoRepositorio.findById(agenda.getId_medico());
+     agenda.setNombremedico(medico.get().getNombre());
+     agenda.setApellidomedico(medico.get().getApellido());
+     agenda.setEspecialidad(medico.get().getEspecialidad());
+      return agendaRepositorio.save(agenda);
    }
 
-   public String eliminarAgendaPorID(String id){
-      if(agendaRepositorio.existsById(id)){
-          agendaRepositorio.deleteById(id);               
-          return "Agenda eliminada";
-      }else{
-          return "Documento no encontrado";
-      } 
-  }
+   public String eliminarAgendaPorID(String id) {
+      if (agendaRepositorio.existsById(id)) {
+         agendaRepositorio.deleteById(id);
+         return "Agenda eliminada";
+      } else {
+         return "Documento no encontrado";
+      }
+   }
 
 }

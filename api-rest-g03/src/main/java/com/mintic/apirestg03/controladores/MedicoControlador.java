@@ -1,10 +1,12 @@
 package com.mintic.apirestg03.controladores;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,11 @@ public class MedicoControlador {
     @GetMapping()
     public List<MedicoModelo> getAllMedicos(){
         return medicoServicio.getAllMedicos();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<MedicoModelo> findMedicoById(@PathVariable("id") String id){
+        return medicoServicio.getMedicoById(id);
     }
 
     @PostMapping()

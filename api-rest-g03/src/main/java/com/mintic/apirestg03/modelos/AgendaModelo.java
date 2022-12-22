@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,11 +22,12 @@ public class AgendaModelo {
     private String id;
     private String id_medico;
     private String nombremedico;
-    private String apellidomedico;
-    private String especialidad;
+    private String apellidomedico;//atributo de medico
+    private String especialidad;// atributo de médico
+    private String consultoriomedico;
+   // private String consultorio;//atributo de médico
     private LocalDate fecha;
-    private String contrasenha;
-
     private List<CitaModelo> citas;//[{id_paciente,hora},{},{}]
+
     
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +36,16 @@ public class PacienteControlador {
         return pacienteServicio.getPacienteById(id);
     }
 
+    @GetMapping("/existe/query")
+    public boolean pacienteExiste(@RequestParam("ndocumento") Long ndocumento){
+        return pacienteServicio.pacienteExiste(ndocumento);
+    };
+
+    @GetMapping("/ndocumento/{ndocumento}")
+    public Optional<PacienteModelo> findPacienteByNdocumento(@PathVariable("ndocumento")long ndocumento){
+        return pacienteServicio.pacientePorNdocumento(ndocumento);
+    }
+
     @GetMapping("/query") // ejemplo: http://localhost:8080/pacientes/query?apellido=mejia
     public List<PacienteModelo> getPacientesByApellido(@RequestParam("apellido") String apellido){
         return pacienteServicio.getPacientesByApellido(apellido);
@@ -58,8 +68,8 @@ public class PacienteControlador {
         return pacienteServicio.guardarPaciente(paciente);
     }
 
- /*    @DeleteMapping("/{id}")
+ @DeleteMapping("/{id}")
     public String deletePacienteById(@PathVariable("id") String id){
         return pacienteServicio.eliminarPacientePorID(id);
-    }*/
+    }
 }
