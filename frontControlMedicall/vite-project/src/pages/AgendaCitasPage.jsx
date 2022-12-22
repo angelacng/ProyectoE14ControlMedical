@@ -5,7 +5,7 @@ import { CardsAgenda } from "../components/CardsAgenda";
 function AgendaCitasPage(){
     return(
         <Container>
-            <h1>Agendas de Citas</h1>
+            <h1>Agendar Cita</h1>
             <CardsAgenda/>
         </Container>
     )

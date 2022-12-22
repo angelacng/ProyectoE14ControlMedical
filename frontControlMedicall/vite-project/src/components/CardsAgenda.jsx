@@ -43,7 +43,6 @@ function CardsAgenda() {
                                 </Card.Text>
                                 <Card.Text>
                                     {agenda.especialidad}
-
                                 </Card.Text>
                                 <Link to={`/agenda/citas/${agenda.id}`}>Agendar cita</Link>
 
